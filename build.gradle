@@ -1,0 +1,54 @@
+buildscript {
+    repositories {
+        maven{ url 'https://maven.aliyun.com/repository/public/'}
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    }
+}
+plugins {
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+group = 'com.dwfs'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    maven {
+        url("https://maven.aliyun.com/repository/public/")
+    }
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+}
+List sharding = [
+        'org.apache.shardingsphere:sharding-jdbc-core:4.0.0-RC3',
+        'org.jline:jline:3.14.1'
+]
+
+List mybatis = [
+        'org.freemarker:freemarker:2.3.28',
+        'com.baomidou:mybatis-plus-boot-starter:3.3.0',
+        'com.baomidou:mybatis-plus-generator:3.3.0',
+        'com.baomidou:mybatis-plus-annotation:3.3.0',
+        'com.baomidou:mybatis-plus-extension:3.3.0',
+        'org.apache.velocity:velocity-engine-core:2.2',
+        'com.alibaba:druid:1.1.10',
+        'mysql:mysql-connector-java:5.1.48'
+
+]
+
+List log=[
+        'org.slf4j:slf4j-api:1.7.9',
+        'org.projectlombok:lombok:1.18.0'
+]
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web',sharding,mybatis,log
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
